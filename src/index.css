@@ -36,6 +36,7 @@ del {
     font-size: 15px;
     margin-left: 10px;
 }
+
 .section-heading {
     width: 100%;
     display: flex;
@@ -77,8 +78,6 @@ del {
     font-size: 32px;
     margin: 0;
 }
-
-a
 
 @media (max-width: 992px) {
     .section-heading {

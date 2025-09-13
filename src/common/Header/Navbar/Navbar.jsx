@@ -1,13 +1,14 @@
 import React, { useState, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./navbar.css";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaSignOutAlt } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { MdFavoriteBorder } from "react-icons/md";
 import { FaUserAlt } from "react-icons/fa";
 import logo from "./../../../assets/images/Logo.png";
 import { HiDotsVertical } from "react-icons/hi";
 import { ProductsContext } from "../../../context/ProductsContext";
+import Logout from "../../../component/logout/Logout";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,24 +20,18 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { products } = useContext(ProductsContext);
 
- const filteredProducts =
-   searchTerm.trim() === ""
-     ? []
-     : products.filter((product) =>
-         product.name.toLowerCase().includes(searchTerm.toLowerCase())
-       );
+  const filteredProducts =
+    searchTerm.trim() === ""
+      ? []
+      : products.filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
 
- const handleSearchSelect = (id, name) => {
-   navigate(`/product/${id}`);
-   setSearchTerm(name);
-   setShowDropdown(false);
- };
- 
-   const handleLogout = () => {
-     localStorage.removeItem("token");
-     localStorage.removeItem("role");
-   };
-
+  const handleSearchSelect = (id, name) => {
+    navigate(`/product/${id}`);
+    setSearchTerm(name);
+    setShowDropdown(false);
+  };
 
 
   return (
@@ -122,9 +117,16 @@ const Navbar = () => {
             >
               <FaUserAlt />
             </NavLink>
-            <button navigate="/" className="login-link" onClick={handleLogout}>
-              logout
-            </button>
+            {/* <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                isActive ? "act-icons active" : "act-icons"
+              }
+              onClick={handleLogout}
+            >
+              <FaSignOutAlt />
+            </NavLink> */}
+            <Logout />
           </div>
         </div>
       </nav>

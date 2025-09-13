@@ -52,35 +52,27 @@ function Cart() {
             </div>
 
             {cart.map((item) => (
-              <div className="cart-row" key={item.id}>
+              <div className="cart-row" key={item._id}>
                 <div className="product-info">
-                  <img
-                    src={item.images || "https://via.placeholder.com/100"}
-                    alt={item.name}
-                  />
-                  <p>{item.name}</p>
+                  <img src={item.images[0]} alt={item.title} />
+                  <p>{item.title}</p>
                 </div>
                 <p>${item.price}</p>
                 <input
                   type="number"
                   min="1"
                   value={item.quantity}
-                  onChange={(e) => updateQuantity(item.id, e.target.value)}
+                  onChange={(e) => updateQuantity(item._id, e.target.value)}
                 />
                 <p>${item.price * item.quantity}</p>
-                <button
-                  className="remove_item"
-                  onClick={() => removeFromCart(item.id)}
-                >
+                <button className="remove_item" onClick={() => removeFromCart(item._id)}>
                   Remove
                 </button>
               </div>
             ))}
 
             <div className="cart-buttons">
-              <button className="btn-outline" onClick={clearCart}>
-                Clear Cart
-              </button>
+              <button className="btn btn-danger" onClick={clearCart}>Clear Cart</button>
             </div>
           </div>
 

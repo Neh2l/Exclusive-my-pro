@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Product from "../../common/product/product";
+import Product from "../../common/product/Product";
 import { ProductsContext } from "../../context/ProductsContext";
 import { useNavigate } from "react-router-dom";
 import "./../flashSales/flashSales.css";
@@ -9,8 +9,8 @@ const ExploreProducts = () => {
   const { products } = useContext(ProductsContext);
 
   const filteredProducts = products.slice(2, 10);
-    
-    
+
+
 
   return (
     <div className="FlashSales mt-5">

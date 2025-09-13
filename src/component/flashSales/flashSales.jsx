@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react";
 import "./flashSales.css";
-import Product from "../../common/product/product";
+import Product from "../../common/product/Product";
 import { ProductsContext } from "../../context/ProductsContext";
 import { useNavigate } from "react-router-dom";
 
@@ -15,13 +15,12 @@ const FlashSales = () => {
 
   const { products } = useContext(ProductsContext);
 
-  const filteredProducts = products
-    // .filter((product))
-    .slice(0, 4)
+  const filteredProducts = products.filter((product) => product.price < 500).slice(0, 4);
   useEffect(() => {
     const updateCountdown = () => {
       const now = new Date().getTime();
       const timeLeft = deadline - now;
+
 
       if (timeLeft <= 0) {
         refDays.current.textContent = "0";

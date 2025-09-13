@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ProductsContext } from "../../context/ProductsContext";
-import Product from "../../common/product/product";
+import Product from "../../common/product/Product";
 import { CartContext } from "../../context/CartContext";
 
 
 
 import { FaRegHeart, FaShippingFast, FaShieldAlt } from "react-icons/fa";
-import { getProductById } from "../../Apis/products"; 
+import { getProductById } from "../../Apis/products";
 
 import "./ProductDetails.css";
 
@@ -27,11 +27,8 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        let found = products.find((p) => p._id === id); // خلي بالك هنا لازم تقارن بالـ id كـ string
-        if (!found) {
-          const token = localStorage.getItem("token"); // افترضنا إن التوكن متخزن هنا
-          found = await getProductById(token, id);
-        }
+        let found = products.find((p) => p._id === id);
+
         setProduct(found);
         setMainImg(found?.images?.[0] || "");
       } catch (err) {
