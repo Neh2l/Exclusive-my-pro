@@ -16,7 +16,7 @@ const FlashSales = () => {
   const { products } = useContext(ProductsContext);
 
   const filteredProducts = products
-    .filter((product) => product.price < 500)
+    // .filter((product))
     .slice(0, 4)
   useEffect(() => {
     const updateCountdown = () => {
@@ -48,6 +48,8 @@ const FlashSales = () => {
     const interval = setInterval(updateCountdown, 1000);
     return () => clearInterval(interval);
   }, [deadline]);
+
+  console.log(filteredProducts)
 
   return (
     <div className="FlashSales mt-5">
@@ -86,7 +88,7 @@ const FlashSales = () => {
           {filteredProducts.map((ele) => (
             <div key={ele.id} className="cont-sale">
               <Product ele={ele} />
-              <span className="sale">{ele.discountPercentage}%</span>
+              <span className="sale">{ele.discoun}%</span>
             </div>
           ))}
         </div>

@@ -6,6 +6,9 @@
     background: var(--body-bg);
     font-family: var(--font-text);
 }
+.resend {
+    display:none;
+}
 
 .img-box {
     flex: 1.3;

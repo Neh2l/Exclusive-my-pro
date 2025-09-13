@@ -1,11 +1,13 @@
-import { useContext, useState } from "react";
+import { useContext, useState  } from "react";
 import React from "react";
 import "./product.css";
 import Process from "./Process";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { CartContext } from "../../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 const Product = ({ ele }) => {
+  const navigate = useNavigate()
   const { addToCart } = useContext(CartContext);
   const [added, setAdd] = useState(false);
 
@@ -21,7 +23,7 @@ const Product = ({ ele }) => {
         <img src={ele?.images?.[0]} alt="product" className="product-image" />
         <Process productId={ele?.id || ele?._id} />
 
-        <button className="add-to-cart-btn" onClick={handleAdd}>
+        <button navigate={'/cart'} className="add-to-cart-btn" onClick={handleAdd}>
           {added ? "Added!" : "Add to Cart"}
         </button>
       </div>

@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { use, useContext, useRef, useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
-import { loginUser } from "../../Apis/login";
+import { loginUser } from "../../Apis/Login";
 import "./login.css";
 import { ProductsContext } from "../../context/ProductsContext";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,16 +14,18 @@ const Login = () => {
   const [error, setError] = useState("");
   const { setToken } = useContext(ProductsContext);
 
+
+  const logout = useRef();
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
     try {
-      const { token, role } = await loginUser({
-        email: email,
-        password: password,
-      });
+      const { token, role } = await loginUser({email, password});
+
+      
 
       setToken(token);
       localStorage.setItem("token", token);
@@ -91,15 +93,16 @@ const Login = () => {
             <button type="submit" className="login-btn" disabled={loading}>
               {loading ? "Logging in..." : "Log In"}
             </button>
+
             <a href="/forgot-password" className="forgot-link">
               Forgot Password?
             </a>
+
           </div>
           {error && <p className="error-message">{error}</p>}
         </form>
       </div>
 
-     
       <ToastContainer />
     </div>
   );

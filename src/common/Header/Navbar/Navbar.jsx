@@ -31,6 +31,12 @@ const Navbar = () => {
    setSearchTerm(name);
    setShowDropdown(false);
  };
+ 
+   const handleLogout = () => {
+     localStorage.removeItem("token");
+     localStorage.removeItem("role");
+   };
+
 
 
   return (
@@ -78,11 +84,11 @@ const Navbar = () => {
               <div className="search-dropdown">
                 {filteredProducts.map((product) => (
                   <div
-                    key={product._id} 
+                    key={product._id}
                     className="search-item"
                     onClick={() =>
                       handleSearchSelect(product._id, product.name)
-                    } 
+                    }
                   >
                     {product.name}
                   </div>
@@ -116,6 +122,9 @@ const Navbar = () => {
             >
               <FaUserAlt />
             </NavLink>
+            <button navigate="/" className="login-link" onClick={handleLogout}>
+              logout
+            </button>
           </div>
         </div>
       </nav>

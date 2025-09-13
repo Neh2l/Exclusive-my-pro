@@ -4,22 +4,6 @@ import axios from "axios";
 const API_BASE_URL = "https://backend-gules-six-47.vercel.app/api";
 
 
-export const loginUser = async (email, password) => {
-    try {
-        const response = await axios.post(`${API_BASE_URL}/users/login`, { email, password });
-        if (response.data?.data?.token) {
-            const { token, role } = response.data.data;
-            return { token, role };
-        } else {
-            throw new Error("Invalid response from server");
-            //error500
-        }
-    } catch (error) {
-        console.error("Login API Error:", error.response?.data || error.message);
-        throw error.response?.data || { message: "Login failed" };
-    }
-};
-
 
 // USERS
 
@@ -36,6 +20,33 @@ export const getUserIds = async (token) => {
     });
     return response.data;
 };
+
+export default async function ResendEmail(email) {
+    try {
+        const req = await fetch('https://backend-gules-six-47.vercel.app/api/users/resend', {
+            method: 'POST',
+            body: JSON.stringify(email),
+            headers: { "Content-Type": "application/json" }
+        });
+
+
+        
+
+
+        if (!req.ok) {
+            throw new Error(`Error: ${req.status}`);
+        }
+        const responseData = await req.json();
+        console.log("Response:", responseData);
+        return responseData;
+    } catch (error) {
+        console.error("Request failed:", error.message);
+        return null;
+    }
+}
+
+
+
 
 export const changeUserRole = async (token, id, newRole) => {
     const response = await axios.put(
@@ -63,6 +74,8 @@ export const getProducts = async (token, page = 1) => {
         },
     });
 };
+
+
 
 
 export const addProduct = async (token, productData) => {

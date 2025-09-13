@@ -15,8 +15,8 @@ export const ProductsContextProvider = ({ children }) => {
   const productsURL = `${apiBase}/products`;
   const categoriesURL = `${apiBase}/categories`;
 
+
   const getAllProducts = async () => {
-   
     try {
       const { data } = await axios.get(productsURL, {
         headers: { Authorization: `Bearer ${token}` },

@@ -58,6 +58,7 @@ const ProductsPanel = () => {
     fetchProducts(currentPage);
   }, []);
 
+  // eslint-disable-next-line no-unused-vars
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "images") {

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import "./cart.css";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 
 
 function Cart() {
@@ -11,17 +11,18 @@ function Cart() {
   const shipping = subtotal > 0 ? 0 : 0;
   const total = subtotal + shipping;
   const location = useLocation();
+  const navigate=useNavigate();
 
 
   if (cart.length === 0) {
     return (
       <>
-        <div className="pageHeading py-5 d-flex w-25">
-          <Link to="/" className="nav-link w-25">
-            Home
-          </Link>
-          /<span className="active ms-3">{location.pathname.slice(1)}</span>
-        </div>
+          <div className="pageHeading p-5">
+                <Link to={"/"} style={{ textDecoration: "none", color: "black" }}>
+                  Home
+                </Link>
+                /<span className="active">{location.pathname.slice(1)}</span>
+              </div>
         <div className="cart-page">
           <h2>Shopping Cart</h2>
           <p>Your cart is empty.</p>
@@ -53,8 +54,11 @@ function Cart() {
             {cart.map((item) => (
               <div className="cart-row" key={item.id}>
                 <div className="product-info">
-                  <img src={item.thumbnail || "https://via.placeholder.com/100"} alt={item.title} />
-                  <p>{item.title}</p>
+                  <img
+                    src={item.images || "https://via.placeholder.com/100"}
+                    alt={item.name}
+                  />
+                  <p>{item.name}</p>
                 </div>
                 <p>${item.price}</p>
                 <input
@@ -64,14 +68,19 @@ function Cart() {
                   onChange={(e) => updateQuantity(item.id, e.target.value)}
                 />
                 <p>${item.price * item.quantity}</p>
-                <button className="remove_item" onClick={() => removeFromCart(item.id)}>
+                <button
+                  className="remove_item"
+                  onClick={() => removeFromCart(item.id)}
+                >
                   Remove
                 </button>
               </div>
             ))}
 
             <div className="cart-buttons">
-              <button className="btn-outline" onClick={clearCart}>Clear Cart</button>
+              <button className="btn-outline" onClick={clearCart}>
+                Clear Cart
+              </button>
             </div>
           </div>
 
@@ -90,7 +99,9 @@ function Cart() {
               <span>Total</span>
               <span>${total}</span>
             </div>
-            <button className="btn-checkout">Proceed to Checkout</button>
+            <button navigate={"/checkout"} className="btn-checkout">
+              Proceed to Checkout
+            </button>
           </div>
         </div>
 

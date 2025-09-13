@@ -17,6 +17,7 @@ import ProductDetails from "./component/ProductDetails/ProductDetails";
 import AdminDashboard from "./component/adminDashboard/AdminDashboard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Resend from "./component/Resend";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -38,6 +39,7 @@ const App = () => {
         { path: "product/:id", element: <ProductDetails /> },
         { path: "/admin", element: <AdminDashboard /> },
         { path: "*", element: <NotFound /> },
+        {path:'/reemail',element:<Resend/>}
       ],
     },
   ]);

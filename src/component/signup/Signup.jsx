@@ -11,6 +11,8 @@ export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const location = useLocation();
+ 
+
 
 
   const [errors, setErrors] = useState({});
@@ -23,6 +25,7 @@ export default function Signup() {
     if (!data.email.includes("@")) newErrors.email = "Email is invalid";
     if (data.password.length < 6)
       newErrors.password = "Password must be at least 6 characters";
+      
     return newErrors;
   };
 
@@ -105,12 +108,16 @@ export default function Signup() {
               <button type="submit" className="createAccount">
                 Create Account
               </button>
+              <Link to="/reemail" className="login-link">
+                resend
+              </Link>
+              
               <button type="button" className="google_register">
                 Sign up with Google
               </button>
 
               <p className="login-text">
-                Already have an account?{" "}
+                Already have an account?
                 <Link to="/login" className="login-link">
                   Login
                 </Link>
