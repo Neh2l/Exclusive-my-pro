@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import ProductsPanel from "./../panels/productspanal/ProductsPanal";
 import UsersPanel from "./../panels/userpanal/UserPanel";
-import CategoriesPanel from "./../panels/catpanal/CategoriesPanel"
+import CategoriesPanel from "./../panels/catpanal/CategoriesPanel";
 import MessagesPanel from "./../panels/massagepanal/MessagesPanel";
-import './adminDashboard.css'
+import "./adminDashboard.css";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("products");

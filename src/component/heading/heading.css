@@ -1,6 +1,6 @@
 .Heading {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
     flex-wrap: nowrap;
     width: 100%;
@@ -12,6 +12,6 @@
     .Heading {
         justify-content: center;
         align-items: center;
-        padding: 0;
+        padding: 0 10px;
     }
 }

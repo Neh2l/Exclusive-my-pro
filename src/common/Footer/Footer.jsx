@@ -6,9 +6,10 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { FaFacebookSquare } from "react-icons/fa";
-import qrcode from './../../assets/images/qrcode.jpg'
-import google from './../../assets/images/google.png'
-import appstore from './../../assets/images/appStore.png'
+import qrcode from "./../../assets/images/qrcode.jpg";
+import google from "./../../assets/images/google.png";
+import appstore from "./../../assets/images/appStore.png";
+
 function Footer() {
   return (
     <footer className="bg-black text-white pt-5">
@@ -18,12 +19,7 @@ function Footer() {
             <h5 className="mb-3">Exclusive</h5>
             <p>Subscribe</p>
             <p>Get 10% off your first order</p>
-            <form
-              className="d-flex"
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-            >
+            <form className="d-flex" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
                 placeholder="Send Email"
@@ -105,7 +101,7 @@ function Footer() {
 
       <div
         className="text-center py-2"
-        style={{ backgroundColor: "rgba(255,255,255,0.1)" ,height:"34px" }}
+        style={{ backgroundColor: "rgba(255,255,255,0.1)", height: "34px" }}
       >
         © 2025 Copyright:
         <a

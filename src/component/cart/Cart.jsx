@@ -1,43 +1,37 @@
-import { useContext } from "react";
-import { CartContext } from "../../context/CartContext";
+// src/pages/Cart.jsx
 import "./cart.css";
 import { useLocation, Link, useNavigate } from "react-router-dom";
-
+import { MdDeleteForever } from "react-icons/md";
+import useCart from "../../hook/useCart";
 
 function Cart() {
-  const { cart, updateQuantity, removeFromCart, clearCart } = useContext(CartContext);
+  const {
+    cart,
+    removeFromCart,
+    clearCart,
+    handleChangeAmount,
+    subTotall,
+  } = useCart();
 
-  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const shipping = subtotal > 0 ? 0 : 0;
-  const total = subtotal + shipping;
   const location = useLocation();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
-
-  if (cart.length === 0) {
+  if (!cart || cart.length === 0) {
     return (
-      <>
-          <div className="pageHeading p-5">
-                <Link to={"/"} style={{ textDecoration: "none", color: "black" }}>
-                  Home
-                </Link>
-                /<span className="active">{location.pathname.slice(1)}</span>
-              </div>
-        <div className="cart-page">
-          <h2>Shopping Cart</h2>
-          <p>Your cart is empty.</p>
-        </div>
-      </>
+      <div className="cart-page">
+        <h2>Shopping Cart</h2>
+        <p>Your cart is empty.</p>
+      </div>
     );
   }
 
   return (
     <>
-      <div className="pageHeading p-5 d-flex">
-        <Link to="/" className="nav-link">
+      <div className="pageHeading d-flex pt-5 w-25">
+        <Link to="/" className="me-1">
           Home
         </Link>
-        /<span className="active">{location.pathname.slice(1)}</span>
+        <span className="active">{location.pathname}</span>
       </div>
       <div className="cart-page">
         <h2>Shopping Cart</h2>
@@ -47,32 +41,54 @@ function Cart() {
             <div className="cart-header">
               <span>Product</span>
               <span>Price</span>
-              <span>Quantity</span>
+              <span className="mx-4">Quantity</span>
               <span>Subtotal</span>
+              <span>Left</span>
             </div>
 
-            {cart.map((item) => (
-              <div className="cart-row" key={item._id}>
-                <div className="product-info">
-                  <img src={item.images[0]} alt={item.title} />
-                  <p>{item.title}</p>
+            {cart?.map((item) => {
+              const options = Array(item?.stock)
+                .fill(0)
+                .map((_, i) => (
+                  <option value={i + 1} key={i + 1}>
+                    {i + 1}
+                  </option>
+                ));
+
+              
+
+              return (
+                <div className="cart-row" key={item?._id}>
+                  <div className="product-info">
+                    <img src={item?.images?.[0]} alt={item?.name} />
+                    <p>{item?.name}</p>
+                  </div>
+                  <p className="m-0">${item?.price}</p>
+                  <select
+                    value={item?.amount}
+                    onChange={(e) => handleChangeAmount(e, item._id)}
+                    className="mx-4"
+                  >
+                    {options}
+                  </select>
+                  <p className="m-0">
+                    ${(item?.price * item?.amount).toFixed(2)}
+                  </p>
+                 
+                  <div
+                    className="trash"
+                    onClick={() => removeFromCart(item._id)}
+                  >
+                    <MdDeleteForever />
+                  </div>
                 </div>
-                <p>${item.price}</p>
-                <input
-                  type="number"
-                  min="1"
-                  value={item.quantity}
-                  onChange={(e) => updateQuantity(item._id, e.target.value)}
-                />
-                <p>${item.price * item.quantity}</p>
-                <button className="remove_item" onClick={() => removeFromCart(item._id)}>
-                  Remove
-                </button>
-              </div>
-            ))}
+              );
+            })}
 
             <div className="cart-buttons">
-              <button className="btn btn-danger" onClick={clearCart}>Clear Cart</button>
+              <button className="btn btn-danger" onClick={clearCart}>
+                Clear Cart
+              </button>
             </div>
           </div>
 
@@ -80,18 +96,21 @@ function Cart() {
             <h3>Cart Total</h3>
             <div className="summary-row">
               <span>Subtotal</span>
-              <span>${subtotal}</span>
+              <span>${subTotall?.toFixed(2)}</span>
             </div>
             <div className="summary-row">
               <span>Shipping</span>
-              <span>`{shipping === 0 ? "Free" : $`${shipping}`}</span>
+              <span>$99.00</span>
             </div>
             <hr />
             <div className="summary-row total">
               <span>Total</span>
-              <span>${total}</span>
+              <span>${(subTotall + 99).toFixed(2)}</span>
             </div>
-            <button navigate={"/checkout"} className="btn-checkout">
+            <button
+              className="btn-checkout"
+              onClick={() => navigate("/checkout")}
+            >
               Proceed to Checkout
             </button>
           </div>

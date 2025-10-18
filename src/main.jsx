@@ -6,17 +6,16 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
+import { WishListContextProvider } from "./context/WishListContext.jsx";
 import { ProductsContextProvider } from "./context/ProductsContext.jsx";
-import { CartProvider } from "./context/CartContext.jsx";
+import { CartContextProvider } from "./context/CartContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <ProductsContextProvider>
-
-    <CartProvider>
-      <App />
-    </CartProvider>
-
-
-
+    <CartContextProvider>
+      <WishListContextProvider>
+        <App />
+      </WishListContextProvider>
+    </CartContextProvider>
   </ProductsContextProvider>
 );

@@ -6,7 +6,7 @@ export default function Checkout() {
 
   return (
     <div className="checkout">
-  
+      {/* Billing Details */}
       <div className="billing">
         <h2>Billing Details</h2>
         <form>
@@ -16,11 +16,11 @@ export default function Checkout() {
           </label>
           <label>
             Company Name
-            <input type="text" required/>
+            <input type="text" />
           </label>
           <label>
             Street Address*
-            <input type="text" required/>
+            <input type="text" required />
           </label>
           <label>
             Apartment, floor, etc. (optional)
@@ -28,15 +28,15 @@ export default function Checkout() {
           </label>
           <label>
             Town/City*
-            <input type="text" required/>
+            <input type="text" required />
           </label>
           <label>
             Phone Number*
-            <input type="text" required/>
+            <input type="text" required />
           </label>
           <label>
             Email Address*
-            <input type="email" required/>
+            <input type="email" required />
           </label>
 
           <div className="save-info">
@@ -51,6 +51,7 @@ export default function Checkout() {
       {/* Order Summary */}
       <div className="summary">
         <h2>Your Order</h2>
+
         <div className="product">
           <img src="//" alt="LCD Monitor" />
           <span>LCD Monitor</span>
@@ -75,38 +76,40 @@ export default function Checkout() {
           <span>$1750</span>
         </div>
 
-       <div className="payment">
-  <label className={payment === "bank" ? "active" : ""}>
-    <input
-      type="radio"
-      name="payment"
-      value="bank"
-      checked={payment === "bank"}
-      onChange={(e) => setPayment(e.target.value)}
-    />
-    Bank
-    { <span className="checkmark">✔</span> }
-  </label>
+        {/* Payment Options */}
+        <div className="payment">
+          <label className={payment === "bank" ? "active" : ""}>
+            <input
+              type="radio"
+              name="payment"
+              value="bank"
+              checked={payment === "bank"}
+              onChange={(e) => setPayment(e.target.value)}
+            />
+            Bank
+            <span className="checkmark">✔</span>
+          </label>
 
-  <label className={payment === "cash" ? "active" : ""}>
-    <input
-      type="radio"
-      name="payment"
-      value="cash"
-      checked={payment === "cash"}
-      onChange={(e) => setPayment(e.target.value)}
-    />
-    Cash on delivery
-    { <span className="checkmark">✔</span> }
-  </label>
-</div>
+          <label className={payment === "cash" ? "active" : ""}>
+            <input
+              type="radio"
+              name="payment"
+              value="cash"
+              checked={payment === "cash"}
+              onChange={(e) => setPayment(e.target.value)}
+            />
+            Cash on delivery
+            <span className="checkmark">✔</span>
+          </label>
+        </div>
 
-
+        {/* Coupon Code */}
         <div className="coupon">
           <input type="text" placeholder="Coupon Code" />
           <button>Apply Coupon</button>
         </div>
 
+        {/* Place Order Button */}
         <button className="place-order">Place Order</button>
       </div>
     </div>

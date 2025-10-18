@@ -14,7 +14,7 @@ const Arrow = () => {
   };
 
   const scrollToTop = () => {
-    const scrollDuration = 500; 
+    const scrollDuration = 500;
     const scrollStep = -window.scrollY / (scrollDuration / 15);
     const scrollInterval = setInterval(() => {
       if (window.scrollY !== 0) {
@@ -24,7 +24,6 @@ const Arrow = () => {
       }
     }, 15);
   };
-
 
   useEffect(() => {
     window.addEventListener("scroll", toggleVisible);

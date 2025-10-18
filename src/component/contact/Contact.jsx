@@ -1,8 +1,7 @@
 import { useState } from "react";
 import "./contact.css";
 import CreateContact from "../../Apis/Contact";
-import { useLocation ,Link} from "react-router-dom";
-
+import { useLocation, Link } from "react-router-dom";
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -13,13 +12,14 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const location = useLocation();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const validate = () => {
     const newErrors = {};
-    if (!name) newErrors.name = "Name is required";
-    if (!email.includes("@")) newErrors.email = "Email is invalid";
-    if (!phone) newErrors.phone = "Phone is required";
-    if (!message) newErrors.message = "Message is required";
+    if (!name.trim()) newErrors.name = "Name is required";
+    if (!emailRegex.test(email)) newErrors.email = "Email is invalid";
+    if (!phone.trim()) newErrors.phone = "Phone is required";
+    if (!message.trim()) newErrors.message = "Message is required";
     return newErrors;
   };
 
@@ -33,11 +33,12 @@ export default function Contact() {
       setLoading(true);
       try {
         const token = localStorage.getItem("token");
-        // if (!token) {
-        //   setSuccess("You must be logged in to send a message.");
-        //   setLoading(false);
-        //   return;
-        // }
+    
+        if (!token) {
+          setSuccess("You must be logged in to send a message.");
+          setLoading(false);
+          return;
+        }
 
         const response = await CreateContact(
           { userName: name, email, phone, message },
@@ -50,6 +51,7 @@ export default function Contact() {
           setEmail("");
           setPhone("");
           setMessage("");
+          setErrors({});
         } else {
           setSuccess(response.message || "Failed to send message.");
         }
@@ -64,18 +66,14 @@ export default function Contact() {
 
   return (
     <div className="contact-wrapper">
-      <div className="pageHeading py-5 d-flex w-25">
-        <Link to="/" className="nav-link w-25 m-0">
+      <div className="pageHeading py-5 d-flex w-25 ">
+        <Link to="/" className=" me-1">
           Home
         </Link>
-        /   <span className="active ms-3">{location.pathname.slice(1)}</span>
+        <span className="active ">{location.pathname}</span>
       </div>
 
       <div className="contact-wrapper">
-        {/* <div className="breadcrumb">
-          <span>Home</span> <span className="divider">/</span> <span className="active">Contact</span>
-        </div> */}
-
         <div className="contact-container">
           <div className="left">
             <div className="card">
@@ -114,22 +112,24 @@ export default function Contact() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
+                  {errors.name && <p className="error">{errors.name}</p>}
+
                   <input
                     type="email"
                     placeholder="Your Email *"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
+                  {errors.email && <p className="error">{errors.email}</p>}
+
                   <input
                     type="text"
                     placeholder="Your Phone *"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                   />
+                  {errors.phone && <p className="error">{errors.phone}</p>}
                 </div>
-                {errors.name && <p className="error">{errors.name}</p>}
-                {errors.email && <p className="error">{errors.email}</p>}
-                {errors.phone && <p className="error">{errors.phone}</p>}
 
                 <textarea
                   placeholder="Your Message *"

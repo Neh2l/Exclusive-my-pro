@@ -1,7 +1,8 @@
 .Navbar {
     width: 100%;
-    padding: 15px 25px 10px;
-    border-bottom: 1px solid rgba(32, 32, 32, 0.123);
+    padding: 15px 5px 10px;
+    /* border-bottom: 1px solid rgba(32, 32, 32, 0.123); */
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.089);
 }
 
 nav {
@@ -10,7 +11,7 @@ nav {
     width: 90%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center !important;
     flex-wrap: wrap;
 }
 
@@ -19,8 +20,8 @@ nav * {
 }
 
 nav .logo img {
-    width: 118px;
-    height: 24px;
+    width: 122px;
+    height: 26px;
 }
 
 ul li a.active,
@@ -41,13 +42,17 @@ nav ul {
 
 nav ul li {
     list-style: none;
+    display: block;
 }
 
 nav ul li a {
     text-decoration: none;
     color: var(--main-color);
-    font-size: 15px;
+    font-size: 14px;
     background-color: var(--body-bg);
+    margin: 0;
+    display: block;
+    transform: translateY(8px);
 }
 
 .search-cart-wishlist {

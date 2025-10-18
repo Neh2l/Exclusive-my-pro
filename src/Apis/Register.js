@@ -5,8 +5,6 @@ export default async function CreateNewUser(data) {
             body: JSON.stringify(data),
             headers: { "Content-Type": "application/json" }
         });
-        
-        
 
         if (!req.ok) {
             throw new Error(`Error: ${req.status}`);

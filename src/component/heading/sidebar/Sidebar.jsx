@@ -13,13 +13,13 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="Sidebar">
-      <div className="container">
-        <ul className="category-list">
+    <div className="SidebarCustom">
+      <div className="containerCustom">
+        <ul className="sidebar-category-list">
           {categoryName.map((val, index) => (
             <div
               key={index}
-              className="cat-btn"
+              className="sidebar-cat-btn"
               onClick={() => handleGetCategory(val._id)}
             >
               <li className="m-0 m-auto">{val.title}</li>

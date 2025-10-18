@@ -8,9 +8,8 @@ export const getProductById = async (token, productId) => {
             headers: { Authorization: `Bearer ${token}` },
         });
 
-        
         if (response.data?.data) {
-            return response.data.data; 
+            return response.data.data;
         } else {
             throw new Error("Invalid response from server");
         }

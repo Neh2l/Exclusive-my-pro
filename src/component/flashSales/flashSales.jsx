@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useRef } from "react";
 import "./flashSales.css";
-import Product from "../../common/product/Product";
+import Product from "../../common/product/product";
 import { ProductsContext } from "../../context/ProductsContext";
 import { useNavigate } from "react-router-dom";
 
 const FlashSales = () => {
   const navigate = useNavigate();
-  const deadline = new Date("Oct 25, 2025 23:59:59").getTime();
+  const deadline = new Date("Oct 25, 2027 23:59:59").getTime();
 
   const refDays = useRef();
   const refHours = useRef();
@@ -15,12 +15,14 @@ const FlashSales = () => {
 
   const { products } = useContext(ProductsContext);
 
-  const filteredProducts = products.filter((product) => product.price < 500).slice(0, 4);
+
+  const filteredProducts = products
+    .slice(20, 24);
+
   useEffect(() => {
     const updateCountdown = () => {
       const now = new Date().getTime();
       const timeLeft = deadline - now;
-
 
       if (timeLeft <= 0) {
         refDays.current.textContent = "0";
@@ -48,7 +50,7 @@ const FlashSales = () => {
     return () => clearInterval(interval);
   }, [deadline]);
 
-  console.log(filteredProducts)
+
 
   return (
     <div className="FlashSales mt-5">
@@ -84,10 +86,10 @@ const FlashSales = () => {
         </div>
 
         <div className="product-sales w-100">
-          {filteredProducts.map((ele) => (
-            <div key={ele.id} className="cont-sale">
+          {filteredProducts.map((ele, i) => (
+            <div key={i} className="cont-sale">
               <Product ele={ele} />
-              <span className="sale">{ele.discoun}%</span>
+              <span className="sale">20%</span>
             </div>
           ))}
         </div>

@@ -1,45 +1,121 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./layout/Layout";
-import Home from "./component/home/Home";
-import Cart from "./component/cart/Cart";
-import About from "./component/about/About";
-import Contact from "./component/contact/Contact";
-import SignUp from "./component/signup/Signup";
-import Wishlist from "./component/wishlist/Wishlist";
-import Login from "./component/login/login";
-import ProductsOfCategory from "./component/productsOfCategory/ProductsOfCategory";
+import { lazy, Suspense } from "react";
+const Layout =lazy(()=>import("./layout/Layout"))
+const Home =lazy(()=>import("./component/home/Home"))
+const Cart=lazy(()=>import("./component/cart/Cart"))
+const About = lazy(() =>import("./component/about/About"));
+const Contact =lazy(()=>import("./component/contact/Contact"))
+const SignUp =lazy(()=>import("./component/signup/Signup"))
+const Wishlist =lazy(()=>import("./component/wishlist/Wishlist"))
+const Login =lazy(()=>import("./component/login/login"))
+const ProductsOfCategory =lazy(()=>import("./component/productsOfCategory/ProductsOfCategory"))
 import NotFound from "./component/error404/notfound";
 import Checkout from "./component/checkout/checkout";
-import Account from "./component/account/account";
-import Products from "./component/products/Products";
-import FlashSales from "./component/flashSales/FlashSales";
-import ProductDetails from "./component/ProductDetails/ProductDetails";
-import AdminDashboard from "./component/adminDashboard/AdminDashboard";
+const Account =lazy(()=>import("./component/account/account"))
+const Products =lazy(()=>import("./component/products/Products"))
+const ProductDetails=lazy(()=>import("./component/ProductDetails/ProductDetails"))
+const AdminDashboard=lazy(()=>import("./component/adminDashboard/AdminDashboard"))
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Resend from "./component/Resend";
+import LottiHandeler from "./common/lottihandeler/LottiHandeler";
+
 
 const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout />,
+      element: (
+        <Suspense fallback={<LottiHandeler ststue="main" />}>
+          <Layout />
+        </Suspense>
+      ),
       children: [
-        { path: "/", element: <Home /> },
-        { path: "cart", element: <Cart /> },
-        { path: "about", element: <About /> },
-        { path: "contact", element: <Contact /> },
-        { path: "wishlist", element: <Wishlist /> },
-        { path: "signup", element: <SignUp /> },
-        { path: "login", element: <Login /> },
+        {
+          path: "",
+          element: (
+            <Suspense fallback={<LottiHandeler ststue="comp" />}>
+              <Home />
+            </Suspense>
+          ),
+        },
+        {
+          path: "carts",
+          element: (
+            <Suspense fallback={<LottiHandeler ststue="comp" />}>
+              <Cart />
+            </Suspense>
+          ),
+        },
+        {
+          path: "about",
+          element: (
+            <Suspense fallback={<LottiHandeler ststue="comp" />}>
+              <About />
+            </Suspense>
+          ),
+        },
+        {
+          path: "contact",
+          element: (
+            <Suspense fallback={<LottiHandeler ststue="comp" />}>
+              <Contact />
+            </Suspense>
+          ),
+        },
+        {
+          path: "wishlist",
+          element: (
+            <Suspense fallback={<LottiHandeler ststue="comp" />}>
+              <Wishlist />
+            </Suspense>
+          ),
+        },
+        {
+          path: "signup",
+          element: (
+            <Suspense fallback={<LottiHandeler ststue="comp" />}>
+              <SignUp />
+            </Suspense>
+          ),
+        },
+        {
+          path: "login",
+          element: (
+            <Suspense fallback={<LottiHandeler ststue="comp" />}>
+              <Login />
+            </Suspense>
+          ),
+        },
         { path: "checkout", element: <Checkout /> },
-        { path: "products", element: <Products /> },
-        { path: "/ProductsOfCategory", element: <ProductsOfCategory /> },
+        {
+          path: "products",
+          element: (
+            <Suspense fallback={<LottiHandeler ststue="comp" />}>
+              <Products />
+            </Suspense>
+          ),
+        },
+        {
+          path: "category/:categoryId",
+          element: (
+            <Suspense fallback={<LottiHandeler ststue="comp" />}>
+              <ProductsOfCategory />
+            </Suspense>
+          ),
+        },
         { path: "account", element: <Account /> },
-        { path: "product/:id", element: <ProductDetails /> },
-        { path: "/admin", element: <AdminDashboard /> },
+        {
+          path: "product/:id",
+          element: (
+            <Suspense fallback={<LottiHandeler ststue="comp" />}>
+              <ProductDetails />
+            </Suspense>
+          ),
+        },
+        { path: "admin", element: <AdminDashboard /> },
+        { path: "reemail", element: <Resend /> },
         { path: "*", element: <NotFound /> },
-        {path:'/reemail',element:<Resend/>}
       ],
     },
   ]);

@@ -66,13 +66,13 @@ export default function Signup() {
 
   return (
     <>
-      <div className="pageHeading py-5 d-flex w-25">
-        <Link to="/" className="nav-link w-25">
+      <div className="pageHeading pt-5 d-flex w-25 ">
+        <Link to="/" className=" me-1">
           Home
         </Link>
-        /<span className="active ms-3">{location.pathname.slice(1)}</span>
+        <span className="active ">{location.pathname}</span>
       </div>
-      <div className="register-container">
+      <div className="register-container mt-0">
         <div className="img-box">
           <img src={signup_img} alt="register" />
         </div>
@@ -111,14 +111,10 @@ export default function Signup() {
               <Link to="/reemail" className="login-link">
                 resend
               </Link>
-              
-              <button type="button" className="google_register">
-                Sign up with Google
-              </button>
 
               <p className="login-text">
-                Already have an account?
-                <Link to="/login" className="login-link">
+                Already have an account?!
+                <Link to="/login" className="login-link ms-2">
                   Login
                 </Link>
               </p>

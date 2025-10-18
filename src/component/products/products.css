@@ -84,3 +84,25 @@
         width: 100%;
     }
 }
+
+.skeleton-card {
+    width: 100%;
+    height: 350px;
+    border-radius: 10px;
+    background: linear-gradient(90deg,
+            #e0e0e0 25%,
+            #f0f0f0 37%,
+            #e0e0e0 63%);
+    background-size: 400% 100%;
+    animation: skeleton-loading 1.2s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 100% 0;
+    }
+
+    100% {
+        background-position: -100% 0;
+    }
+}

@@ -14,17 +14,13 @@ footer h5 {
     letter-spacing: 1.2px !important;
     color: var(--body-color);
     font-size: 1.1rem;
-  
-    /* margin-bottom: 1.2rem; */
 }
 
 footer p,
 footer ul li {
     font-size: 0.7rem !important;
-  
     opacity: 0.6 !important;
     margin-bottom: 1rem;
-   
 }
 
 footer ul {
@@ -35,7 +31,7 @@ footer ul {
 
 footer .icon {
     font-size: 28px !important;
-    transition: .3s;
+    transition: 0.3s;
     color: var(--body-color) !important;
     border-radius: 8px !important;
     cursor: pointer !important;
@@ -44,8 +40,3 @@ footer .icon {
 footer .icon:hover {
     color: var(--main-color) !important;
 }
-
-/* 
-.row.gy-4>div {
-    margin-bottom: 2.2rem;
-} */

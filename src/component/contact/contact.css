@@ -15,6 +15,10 @@
     font-weight: bold;
 }
 
+.pageHeading a{
+    text-decoration: none;
+    color: var(--body-color);
+}
 .contact-wrapper {
     width: 100%;
     background: var(--body-bg);
@@ -28,7 +32,7 @@
     width: 100%;
     max-width: 1200px;
     margin: auto;
-    padding: 60px 80px;
+    padding: 5px 50px;
     gap: 40px;
     background: var(--body-bg);
     font-family: var(--font-text);

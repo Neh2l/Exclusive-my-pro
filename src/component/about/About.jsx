@@ -1,58 +1,62 @@
 import React from "react";
 import "./about.css";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-
+import { Link } from "react-router-dom";
 import { TbTruckDelivery } from "react-icons/tb";
 import { RiCustomerServiceLine } from "react-icons/ri";
 import { IoShieldCheckmark } from "react-icons/io5";
+
+import girlImage from "./../../assets/images/about_girl.jpg";
+import boyImage from "./../../assets/images/about_boy.jpg";
+import aboutimg from "./../../assets/images/Shopping bag concept illustration _ Free Vector.jpg";
 
 const team = [
   {
     name: "Zena Ahmed",
     track: "Frontend",
-    img: "/public/photo_2025-09-05_17-42-16.jpg",
+    img: girlImage,
     github: "//",
     linkedin: "//",
   },
   {
     name: "Noura Mohamed",
     track: "Frontend",
-    img: "/public/photo_2025-09-05_17-42-16.jpg",
+    img: girlImage,
     github: "/",
     linkedin: "//",
   },
   {
     name: "Nehal Reda",
     track: "Frontend",
-    img: "/public/photo_2025-09-05_17-42-16.jpg",
+    img: girlImage,
     github: "/",
     linkedin: "/",
   },
   {
     name: "Menna Elgharabawi",
     track: "Backend",
-    img: "/public/photo_2025-09-05_17-42-16.jpg",
+    img: girlImage,
     github: "/",
     linkedin: "/",
   },
   {
     name: "Alaa",
     track: "Backend",
-    img: "/public/photo_2025-09-05_17-42-16.jpg",
+    img: girlImage,
     github: "/",
     linkedin: "/",
   },
   {
     name: "Khaled Mahmoud",
     track: "Backend",
-    img: "/public/photo_2025-09-05_17-42-12.jpg",
+    img: boyImage,
     github: "/",
     linkedin: "/",
   },
   {
     name: "Ahmed Ewaida",
     track: "Flutter",
-    img: "/public/photo_2025-09-05_17-42-12.jpg",
+    img: boyImage,
     github: "/",
     linkedin: "/",
   },
@@ -61,6 +65,12 @@ const team = [
 const About = () => {
   return (
     <div className="about">
+      <div className="pageHeading  d-flex w-25 ">
+        <Link to="/" className=" me-1">
+          Home
+        </Link>
+        <span className="active ">{location.pathname}</span>
+      </div>
       <section className="our-story">
         <div className="story-text">
           <h2>Our Story</h2>
@@ -78,10 +88,7 @@ const About = () => {
           </p>
         </div>
         <div className="story-image">
-          <img
-            src="/public/Shopping bag concept illustration _ Free Vector.jpg"
-            alt="Our Story"
-          />
+          <img src={aboutimg} alt="Our Story" />
         </div>
       </section>
 
@@ -117,7 +124,6 @@ const About = () => {
       <section className="features">
         <div className="feature-card">
           <div className="icon">
-            {/* <i className="bi bi-truck"></i> */}
             <TbTruckDelivery />
           </div>
           <h3>FREE AND FAST DELIVERY</h3>
@@ -126,7 +132,6 @@ const About = () => {
 
         <div className="feature-card">
           <div className="icon">
-            {/* <i className="bi bi-headset"></i> */}
             <RiCustomerServiceLine />
           </div>
           <h3>24/7 CUSTOMER SERVICE</h3>
@@ -136,7 +141,6 @@ const About = () => {
         <div className="feature-card">
           <div className="icon">
             <IoShieldCheckmark />
-            {/* <i className="bi bi-shield-check"></i> */}
           </div>
           <h3>MONEY BACK GUARANTEE</h3>
           <p>We return money within 30 days</p>

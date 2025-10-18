@@ -8,7 +8,7 @@ const ExploreProducts = () => {
   const navigate = useNavigate();
   const { products } = useContext(ProductsContext);
 
-  const filteredProducts = products.slice(2, 10);
+  const filteredProducts = products.slice(12, 20);
 
 
 

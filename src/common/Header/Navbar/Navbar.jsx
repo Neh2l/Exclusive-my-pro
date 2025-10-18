@@ -9,6 +9,8 @@ import logo from "./../../../assets/images/Logo.png";
 import { HiDotsVertical } from "react-icons/hi";
 import { ProductsContext } from "../../../context/ProductsContext";
 import Logout from "../../../component/logout/Logout";
+import { MdNightlightRound } from "react-icons/md";
+
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,15 +26,14 @@ const Navbar = () => {
     searchTerm.trim() === ""
       ? []
       : products.filter((product) =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+          product.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
 
   const handleSearchSelect = (id, name) => {
     navigate(`/product/${id}`);
     setSearchTerm(name);
     setShowDropdown(false);
   };
-
 
   return (
     <div className="Navbar">
@@ -85,16 +86,16 @@ const Navbar = () => {
                       handleSearchSelect(product._id, product.name)
                     }
                   >
-                    {product.name}
+                    {product.name}{" "}
                   </div>
                 ))}
               </div>
             )}
           </div>
 
-          <div className="icons-page">
+          <div className="icons-page ">
             <NavLink
-              to="/cart"
+              to="/carts"
               className={({ isActive }) =>
                 isActive ? "act-icons active" : "act-icons"
               }
@@ -117,15 +118,6 @@ const Navbar = () => {
             >
               <FaUserAlt />
             </NavLink>
-            {/* <NavLink
-              to="/login"
-              className={({ isActive }) =>
-                isActive ? "act-icons active" : "act-icons"
-              }
-              onClick={handleLogout}
-            >
-              <FaSignOutAlt />
-            </NavLink> */}
             <Logout />
           </div>
         </div>

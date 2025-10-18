@@ -1,10 +1,10 @@
-import React, { use, useContext, useRef, useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { useNavigate, Navigate, Link } from "react-router-dom";
 import { loginUser } from "../../Apis/Login";
 import "./login.css";
 import { ProductsContext } from "../../context/ProductsContext";
 import { ToastContainer, toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import loginimg from "./../../assets/images/loginimage.jpg";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,25 +14,18 @@ const Login = () => {
   const [error, setError] = useState("");
   const { setToken } = useContext(ProductsContext);
 
-
-  const logout = useRef();
- 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
     try {
-      const { token, role } = await loginUser({email, password});
-
-      
+      const { token, role } = await loginUser({ email, password });
 
       setToken(token);
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
-      
 
-   
       toast.success("Successfully logged in!", {
         position: "top-right",
         autoClose: 2000,
@@ -46,7 +39,6 @@ const Login = () => {
       console.error(err);
       setError(err.message || "Login failed");
 
-   
       toast.error("Login failed! Please check your credentials.", {
         position: "top-right",
         autoClose: 3000,
@@ -55,6 +47,7 @@ const Login = () => {
       setLoading(false);
     }
   };
+
 
   const ProtectedAdminRoute = ({ children }) => {
     const token = localStorage.getItem("token");
@@ -67,44 +60,51 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
-      <div className="login-img">
-        <img src="/public/loginimage.jpg" alt="loginimg" />
+    <>
+      <div className="pageHeading d-flex w-25 pt-5">
+        <Link to="/" className=" me-1">
+          Home
+        </Link>
+        <span className="active ">{location.pathname}</span>
       </div>
-      <div className="login-container">
-        <p>Log in to Exclusive</p>
-        <p>Enter your details below</p>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            required
-            placeholder="Email or Phone Number"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            required
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <div className="login-actions">
-            <button type="submit" className="login-btn" disabled={loading}>
-              {loading ? "Logging in..." : "Log In"}
-            </button>
+      <div className="login">
+        <div className="login-img">
+          <img src={loginimg} alt="loginimg" />
+        </div>
+        <div className="login-container">
+          <p>Log in to Exclusive</p>
+          <p>Enter your details below</p>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="email"
+              required
+              placeholder="Email or Phone Number"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              required
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div className="login-actions">
+              <button type="submit" className="login-btn" disabled={loading}>
+                {loading ? "Logging in..." : "Log In"}
+              </button>
 
-            <a href="/forgot-password" className="forgot-link">
-              Forgot Password?
-            </a>
+              <Link to="/forgot-password" className="forgot-link">
+                Forgot Password?
+              </Link>
+            </div>
+            {error && <p className="error-message">{error}</p>}
+          </form>
+        </div>
 
-          </div>
-          {error && <p className="error-message">{error}</p>}
-        </form>
+        <ToastContainer />
       </div>
-
-      <ToastContainer />
-    </div>
+    </>
   );
 };
 

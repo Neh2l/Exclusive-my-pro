@@ -8,27 +8,83 @@ export const ProductsContextProvider = ({ children }) => {
   const [productsOfCategory, setProductsOfCategory] = useState([]);
   const [categoryName, setCategoryName] = useState([]);
   const [sort, setSort] = useState("Default");
- const [token, setToken] = useState(localStorage.getItem("token"));
- 
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [productsData, setProductsData] = useState([]);
 
   const apiBase = "https://backend-gules-six-47.vercel.app/api";
   const productsURL = `${apiBase}/products`;
   const categoriesURL = `${apiBase}/categories`;
 
+  
+  useEffect(() => {
+    setProductsData(productsOfCategory);
+  }, [productsOfCategory]);
 
-  const getAllProducts = async () => {
-    try {
-      const { data } = await axios.get(productsURL, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setProducts(data.data);
-    } catch (error) {
-      console.error("Error fetching products:", error);
+const getAllProducts = async () => {
+  try {
+  
+    const { data: allProductsRes } = await axios.get(productsURL, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const allProducts = allProductsRes.data;
+
+
+    const categoriesResponse = await axios.get(categoriesURL, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    const categories = categoriesResponse.data.data;
+
+    if (!Array.isArray(categories)) {
+      console.error("Expected categories to be an array but got:", categories);
+      return;
     }
-  };
+
+  
+    const categoryProducts = [];
+
+    for (const category of categories) {
+      try {
+        const categoryRes = await axios.get(
+          `${productsURL}/category/${category._id}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        const productsInCategory = categoryRes.data.data;
+
+        if (Array.isArray(productsInCategory)) {
+          categoryProducts.push(...productsInCategory);
+        }
+      } catch (err) {
+        if (err.response && err.response.status === 404) {
+          console.warn(`No products found for category: ${category.name}`);
+        } else {
+          console.error(
+            `Error fetching products for category: ${category.name}`,
+            err
+          );
+        }
+      }
+    }
+
+
+    const combinedProducts = [...allProducts, ...categoryProducts];
+    const uniqueProducts = Array.from(
+      new Map(combinedProducts.map((p) => [p._id, p])).values()
+    );
+
+ 
+    setProducts(uniqueProducts);
+    setProductsData(uniqueProducts);
+  } catch (error) {
+    console.error("Error fetching complete product list:", error);
+  }
+};
+
+
 
   const getCategoriesName = async () => {
- 
     try {
       const { data } = await axios.get(categoriesURL, {
         headers: { Authorization: `Bearer ${token}` },
@@ -40,7 +96,6 @@ export const ProductsContextProvider = ({ children }) => {
   };
 
   const getProductsOfCategory = async (categoryId) => {
-  
     try {
       const { data } = await axios.get(
         `${productsURL}/category/${categoryId}`,
@@ -81,15 +136,11 @@ export const ProductsContextProvider = ({ children }) => {
     setProducts(sortedProducts);
   };
 
-
-
-
-useEffect(() => {
-
+ 
+  useEffect(() => {
     getAllProducts();
     getCategoriesName();
-
-}, []);
+  }, []);
 
   return (
     <ProductsContext.Provider
@@ -103,7 +154,7 @@ useEffect(() => {
         getProductsOfCategory,
         token,
         setToken,
-        
+        productsData,
       }}
     >
       {children}

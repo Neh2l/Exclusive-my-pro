@@ -1,21 +1,11 @@
-.container-allCat {
+.mySwiper {
+    padding-bottom: 40px;
+    /* مساحة للنقاط */
     width: 100%;
-    display: flex;
-    gap: 22px;
-    overflow-x: auto;
-    padding-bottom: 10px;
-    scroll-snap-type: x mandatory;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: gray transparent;
-
 }
 
-
-.container-allCat>.cat-btn {
-    flex: 0 0 calc((100% - (22px * 3)) / 4);
-    scroll-snap-align: start;
+/* تصميم كروت التصنيف */
+.cat-btn {
     width: 100%;
     height: 145px;
     border-radius: 4px;
@@ -23,11 +13,9 @@
     background: transparent;
     position: relative;
     overflow: hidden;
-    z-index: 1;
     cursor: pointer;
 
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -35,30 +23,28 @@
     transition: all 0.5s ease;
 }
 
-
-.container-allCat>.cat-btn::before {
-    content: '';
+.cat-btn::before {
+    content: "";
     position: absolute;
     bottom: -100%;
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--btn-color);
+    background: var(--btn-color, #007bff);
     transition: all 0.4s ease-in-out;
     z-index: -1;
 }
 
-
-.container-allCat>.cat-btn:hover {
+.cat-btn:hover {
     border: 1px solid transparent;
 }
 
-.container-allCat>.cat-btn:hover::before {
+.cat-btn:hover::before {
     bottom: 0;
 }
 
-.container-allCat>.cat-btn p {
-    font-family: var(--font-bold);
+.cat-btn p {
+    font-family: var(--font-bold, Arial, sans-serif);
     font-style: italic;
     font-size: 20px;
     letter-spacing: 1.1px;
@@ -66,33 +52,45 @@
     transition: color 0.4s;
 }
 
-
-.container-allCat>.cat-btn:hover p {
+.cat-btn:hover p {
     color: white;
 }
 
+/* تصميم النقاط (pagination) */
+.swiper-pagination {
+    position: relative !important;
+    bottom: 0 !important;
+    margin-top: 20px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background-color: gray !important;
+    opacity: 0.7;
+    border-radius: 50%;
+    margin: 5px;
+    transition: all 0.3s ease;
+    transform: none !important;
+    cursor: pointer;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--btn-color, #007bff) !important;
+    opacity: 1;
+}
+
+/* Responsive */
 @media (max-width: 576px) {
-    .container-allCat {
-        flex-wrap: wrap;
-        height: 240px;
-
-    }
-
-    .container-allCat>.cat-btn {
-        flex: 0 0 calc(50% - 11px);
+    .cat-btn {
         height: 110px;
     }
 
-    .container-allCat>.cat-btn p {
+    .cat-btn p {
         font-size: 16px;
     }
-}
-
-.container-allCat::-webkit-scrollbar {
-    height: 6px;
-}
-
-.container-allCat::-webkit-scrollbar-thumb {
-    background-color: gray;
-    border-radius: 4px;
 }

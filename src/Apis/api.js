@@ -1,9 +1,6 @@
-
 import axios from "axios";
 
 const API_BASE_URL = "https://backend-gules-six-47.vercel.app/api";
-
-
 
 // USERS
 
@@ -23,16 +20,11 @@ export const getUserIds = async (token) => {
 
 export default async function ResendEmail(email) {
     try {
-        const req = await fetch('https://backend-gules-six-47.vercel.app/api/users/resend', {
+        const req = await fetch(`${API_BASE_URL}/users/resend`, {
             method: 'POST',
             body: JSON.stringify(email),
             headers: { "Content-Type": "application/json" }
         });
-
-
-        
-
-
         if (!req.ok) {
             throw new Error(`Error: ${req.status}`);
         }
@@ -44,9 +36,6 @@ export default async function ResendEmail(email) {
         return null;
     }
 }
-
-
-
 
 export const changeUserRole = async (token, id, newRole) => {
     const response = await axios.put(
@@ -64,19 +53,13 @@ export const deleteUser = async (token, id) => {
     return response.data;
 };
 
-
 // PRODUCTS
 
 export const getProducts = async (token, page = 1) => {
     return await axios.get(`${API_BASE_URL}/products?page=${page}`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
     });
 };
-
-
-
 
 export const addProduct = async (token, productData) => {
     const response = await axios.post(`${API_BASE_URL}/products`, productData, {
@@ -107,7 +90,6 @@ export const deleteProductImages = async (token, productId, images) => {
     return response.data;
 };
 
-
 // CATEGORIES
 
 export const getCategories = async (token) => {
@@ -137,7 +119,6 @@ export const deleteCategory = async (token, categoryId) => {
     });
     return response.data;
 };
-
 
 // CONTACTS / MESSAGES
 

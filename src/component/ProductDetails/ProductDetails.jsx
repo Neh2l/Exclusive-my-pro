@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ProductsContext } from "../../context/ProductsContext";
 import Product from "../../common/product/Product";
 import { CartContext } from "../../context/CartContext";
@@ -22,7 +22,7 @@ const ProductDetails = () => {
   const [count, setCount] = useState(1);
   const [loading, setLoading] = useState(true);
   const [added, setAdd] = useState(false)
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -42,7 +42,9 @@ const ProductDetails = () => {
   }, [products, id]);
 
   if (loading) return <p>Loading product...</p>;
-  if (!product) return <p>Product not found.</p>;
+  if (!product){
+    navigate("/");
+  };
 
   const previewImages =
     product?.images?.length > 0
@@ -61,7 +63,7 @@ const ProductDetails = () => {
 
   }
   return (
-    <div className="product-details-page">
+    <div className="product-details-page py-5 my-5">
       <div className="product-section">
         <div className="gallery">
           {previewImages.map((img, i) => (
@@ -127,17 +129,7 @@ const ProductDetails = () => {
         </div>
       </div>
 
-      <div className="related">
-        <div className="releted_title">
-          <div className="rect"></div>
-          <h3>Related Products</h3>
-        </div>
-        <div className="related-flex">
-          {related.slice(0, 4).map((item) => (
-            <Product key={item._id} ele={item} />
-          ))}
-        </div>
-      </div>
+    
     </div>
   );
 };
