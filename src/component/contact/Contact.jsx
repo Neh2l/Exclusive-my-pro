@@ -77,9 +77,9 @@ export default function Contact() {
         <div className="contact-container">
           <div className="left">
             <div className="card">
-              <div className="icon-circle">
+              {/* <div className="icon-circle">
                 <i className="bi-telephone"></i>
-              </div>
+              </div> */}
               <div className="card-content">
                 <h4>Call To Us</h4>
                 <p>We are available 24/7, 7 days a week.</p>
@@ -88,9 +88,9 @@ export default function Contact() {
             </div>
 
             <div className="card">
-              <div className="icon-circle">
+              {/* <div className="icon-circle">
                 <i className="bi-envelope"></i>
-              </div>
+              </div> */}
               <div className="card-content">
                 <h4>Write To Us</h4>
                 <p>
