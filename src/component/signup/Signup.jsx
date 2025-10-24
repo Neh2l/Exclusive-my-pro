@@ -1,20 +1,16 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import Register from "../../Apis/Register";
+import signupImg from "../../assets/images/register.jpg";
 import "./signup.css";
-import signup_img from "./../../assets/images/register.jpg";
-import { Link, useLocation } from "react-router-dom";
-import Register from "./../../Apis/Register";
 
 export default function Signup() {
+  // const location = useLocation();
   const nameRef = useRef();
   const genderRef = useRef();
   const addressRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const location = useLocation();
- 
-
-
-
   const [errors, setErrors] = useState({});
 
   const validate = (data) => {
@@ -25,13 +21,11 @@ export default function Signup() {
     if (!data.email.includes("@")) newErrors.email = "Email is invalid";
     if (data.password.length < 6)
       newErrors.password = "Password must be at least 6 characters";
-      
     return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const userData = {
       name: nameRef.current.value,
       gender: genderRef.current.value,
@@ -39,89 +33,78 @@ export default function Signup() {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     };
-
-    console.log(userData)
-
     const validationErrors = validate(userData);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      console.log("User Data before API:", userData);
-
       const response = await Register(userData);
-
       if (response) {
-        console.log("API Response:", response);
         alert("Registered successfully!");
         nameRef.current.value = "";
         genderRef.current.value = "";
         addressRef.current.value = "";
         emailRef.current.value = "";
         passwordRef.current.value = "";
-      } else {
-        alert("Registration failed!");
-      }
+      } else alert("Registration failed!");
     }
   };
 
   return (
-    <>
-      <div className="pageHeading pt-5 d-flex w-25 ">
-        <Link to="/" className=" me-1">
-          Home
-        </Link>
-        <span className="active ">{location.pathname}</span>
-      </div>
-      <div className="register-container mt-0">
-        <div className="img-box">
-          <img src={signup_img} alt="register" />
+    <div>
+      {/* Breadcrumb */}
+      {/* <div className="breadcrumb">
+        <Link to="/">Home</Link> <span className="divider">/</span>
+        <span className="active">{location.pathname.replace("/", "") || "Signup"}</span>
+      </div> */}
+      <div className="signup-wrapper">
+        <div className="signup-left">
+          <img src={signupImg} alt="Register" />
         </div>
 
-        <div className="form-box">
-          <div className="form-card">
-            <h2>Create an account</h2>
-            <p>Enter your details below</p>
+        <div className="signup-right">
+          <div className="signup-card">
+            <h2>Create an Account</h2>
+            <p>Enter your details to get started</p>
+
             <form onSubmit={handleSubmit}>
               <input type="text" placeholder="Full Name" ref={nameRef} />
-              {errors.name && <p className="error">{errors.name}</p>}
+              {errors.name && <p className="error-text">{errors.name}</p>}
 
               <select ref={genderRef}>
                 <option value="">Select Gender</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
-              {errors.gender && <p className="error">{errors.gender}</p>}
+              {errors.gender && <p className="error-text">{errors.gender}</p>}
 
               <input type="text" placeholder="Address" ref={addressRef} />
-              {errors.address && <p className="error">{errors.address}</p>}
+              {errors.address && <p className="error-text">{errors.address}</p>}
 
-              <input
-                type="email"
-                placeholder="Email or Phone Number"
-                ref={emailRef}
-              />
-              {errors.email && <p className="error">{errors.email}</p>}
+              <input type="email" placeholder="Email address" ref={emailRef} />
+              {errors.email && <p className="error-text">{errors.email}</p>}
 
               <input type="password" placeholder="Password" ref={passwordRef} />
-              {errors.password && <p className="error">{errors.password}</p>}
+              {errors.password && (
+                <p className="error-text">{errors.password}</p>
+              )}
 
-              <button type="submit" className="createAccount">
-                Create Account
-              </button>
-              <Link to="/reemail" className="login-link">
-                resend
-              </Link>
-
-              <p className="login-text">
-                Already have an account?!
-                <Link to="/login" className="login-link ms-2">
-                  Login
+              <div className="signup-actions">
+                <button type="submit">Create Account</button>
+                <Link to="/reemail" className="link-text">
+                  Resend
                 </Link>
-              </p>
+              </div>
             </form>
+
+            <p className="switch-text">
+              Already have an account?{" "}
+              <Link to="/login" className="link-text">
+                Login
+              </Link>
+            </p>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

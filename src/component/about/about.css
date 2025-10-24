@@ -1,234 +1,206 @@
+:root {
+  --font-bold: 'Inter';
+  --font-text: 'Poppins';
+  --main-color: #000000;
+  --btn-color: #DB4444;
+  --product-bg: #F5F5F5;
+  --body-bg: #FFFFFF;
+}
+
 .about {
-  text-align: center;
-  padding: 50px 20px;
+  font-family: var(--font-text);
+  color: #333;
+  padding: 70px 5%;
+  background-color: var(--body-bg);
 }
 
-.about h2 {
-  font-size: 2rem;
-  margin-bottom: 40px;
-  color: #db4444;
+/* Breadcrumb */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  margin-bottom: 50px;
 }
 
+.breadcrumb-home {
+  color: var(--btn-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.breadcrumb-current {
+  margin-left: 8px;
+  color: #555;
+}
+
+/* Our Story */
 .our-story {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 40px;
-  margin-bottom: 80px;
   flex-wrap: wrap;
+  margin-bottom: 90px;
 }
 
 .story-text {
   flex: 1;
-  min-width: 280px;
+  min-width: 300px;
 }
 
 .story-text h2 {
-  font-size: 2rem;
+  font-size: 2.2rem;
+  color: var(--btn-color);
   margin-bottom: 20px;
 }
 
 .story-text p {
-  margin-bottom: 15px;
-  line-height: 1.6;
+  line-height: 1.7;
   color: #555;
+  margin-bottom: 15px;
+}
+
+.story-text .brand {
+  color: var(--main-color);
+  font-weight: bold;
 }
 
 .story-image {
   flex: 1;
   text-align: center;
-  min-width: 280px;
 }
 
 .story-image img {
-  max-width: 100%;
-  border-radius: 15px;
-  box-shadow: 0 9px 5px rgba(0, 0, 0, 0.1);
-
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
+/* Team */
+.team-section {
+  text-align: center;
+  margin-bottom: 80px;
+}
 
-/* ----- Team Grid ----- */
+.team-section h2 {
+  color: var(--btn-color);
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
 .team-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 40px;
 }
 
 .team-card {
   background: #fff;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 9px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, background 0.3s;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .team-card:hover {
-  transform: translateY(-25px);
-  background: #f9f9f9;
-  cursor: pointer;
+  transform: translateY(-12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 .team-card img {
-  width: 110px;
-  height: 110px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 15px;
-
 }
 
 .team-card h3 {
-  margin: 5px 0;
-  font-size: 18px;
-  color: #333;
+  font-weight: 600;
+  color: var(--main-color);
 }
 
 .team-card p {
-  font-size: 14px;
-  color: #666;
+  color: #777;
+  margin-bottom: 10px;
 }
 
-.social-links {
-  margin-top: 12px;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
+.social-links a {
+  color: var(--btn-color);
+  font-size: 22px;
+  margin: 0 8px;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.social-links .icon {
-  color: #db4444;
-  font-size: 25px;
-  transition: transform 0.3s, color 0.3s;
-}
-
-.social-links .icon:hover {
+.social-links a:hover {
   color: #c53c3c;
-  transform: scale(1.3);
+  transform: scale(1.2);
 }
 
-
+/* Features */
 .features {
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: stretch;
   gap: 30px;
-  padding: 60px 10%;
   flex-wrap: wrap;
-  text-align: center;
+  padding-top: 40px;
 }
 
 .feature-card {
   flex: 1;
-  min-width: 250px;
-  transition: transform 0.3s ease;
+  min-width: 270px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 .feature-card .icon {
   width: 80px;
   height: 80px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
-  background-color: #000;
-  border: 10px solid #ccc;
+  background-color: var(--main-color);
+  color: #fff;
   display: flex;
-  justify-content: center;
   align-items: center;
-  transition: all 0.3s ease;
-
-}
-
-.feature-card .icon svg {
+  justify-content: center;
+  border-radius: 50%;
   font-size: 32px;
-  color: #fff;
-  transition: all 0.3s ease;
+  margin: 0 auto 20px;
+  transition: background 0.3s;
 }
 
-
-/* 
-.feature-card .icon i {
-  font-size: 28px;
-  color: #fff;
-} */
+.feature-card:hover .icon {
+  background-color: var(--btn-color);
+}
 
 .feature-card h3 {
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-size: 1.2rem;
   margin-bottom: 10px;
+  font-weight: 600;
 }
 
 .feature-card p {
-  font-size: 0.9rem;
-  color: #555;
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
-
-.feature-card .icon {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
-  background-color: #000;
-  border: 10px solid #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.3s ease;
-}
-
-/* .feature-card .icon i {
-  font-size: 28px;
-  color: #fff;
-  transition: transform 0.3s ease, color 0.3s ease;
-} */
-
-/* Hover Effect */
-.feature-card:hover .icon {
-  background-color: #ff4d4f;
-  border-color: #ffb3b3;
-  transform: scale(1.1);
-}
-
-/* .feature-card:hover .icon i {
-  transform: scale(1.2);       
-  color: #fff;                
-} */
-
-
+/* Responsive */
 @media (max-width: 768px) {
-  .about h2 {
-    font-size: 1.6rem;
+  .our-story {
+    flex-direction: column;
+    text-align: center;
   }
 
-  .team-card {
-    padding: 15px;
-  }
-
-  .team-card img {
-    width: 90px;
-    height: 90px;
-  }
-}
-
-@media (max-width: 480px) {
-  .about {
-    padding: 30px 10px;
-  }
-
-  .about h2 {
-    font-size: 1.4rem;
-  }
-
-  .team-card h3 {
-    font-size: 16px;
-  }
-
-  .team-card p {
-    font-size: 13px;
-  }
-
-  .social-links .icon {
-    font-size: 20px;
+  .story-text, .story-image {
+    width: 100%;
   }
 }

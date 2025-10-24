@@ -1,210 +1,166 @@
-.register-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: var(--body-bg);
-    font-family: var(--font-text);
-}
-.resend {
-    display:none;
+:root {
+  --main-color: #111;
+  --accent-color: #db4444;
+  --bg-light: #fafafa;
+  --card-bg: #fff;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
 }
 
-.img-box {
-    flex: 1.9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.signup-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-light);
+  overflow: hidden;
 }
 
-.img-box img {
-    width: 100%;
-    height: 103vh;
-    object-fit: cover;
-    margin-left: 5rem;
-    border-radius: 10px;
+/* Breadcrumb */
+.breadcrumb {
+  width: 90%;
+  max-width: 900px;
+  margin: 20px auto;
+  font-size: 14px;
+  color: #555;
 }
 
-.form-box {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
+.breadcrumb a {
+  text-decoration: none;
+  color: var(--accent-color);
+  font-weight: 500;
 }
 
-.form-card {
-    width: 100%;
-    max-width: 600px;
-    padding: 50px;
-    box-shadow: none !important;
-
+.breadcrumb .divider {
+  margin: 0 5px;
+  color: #999;
 }
 
-.form-card h2 {
-    font-family: var(--font-bold);
-    font-size: 28px;
-    margin-bottom: 10px;
+.breadcrumb .active {
+  color: #333;
+  font-weight: 600;
+  text-transform: capitalize;
 }
 
-.form-card p {
-    font-size: 15px;
-    margin-bottom: 20px;
-    color: #666;
+/* Left side image */
+.signup-left {
+  flex: 1.2;
 }
 
-form input,
-form select {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 15px;
-    font-family: var(--font-text);
+.signup-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-form input:focus,
-form select:focus {
-    border-color: var(--btn-color);
-    outline: none;
+/* Right side form */
+.signup-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-button.createAccount {
-    width: 100%;
-    padding: 14px;
-    margin-top: 10px;
-    background: var(--btn-color);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-family: var(--font-bold);
-    cursor: pointer;
-    transition: 0.3s;
+.signup-card {
+  width: 90%;
+  max-width: 450px;
+  background: var(--card-bg);
+  padding: 50px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  text-align: center;
 }
 
-button.createAccount:hover {
-    background: #c73b3b;
+.signup-card h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--main-color);
 }
 
-button.google_register {
-    width: 100%;
-    padding: 14px;
-    margin-top: 15px;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
+.signup-card p {
+  color: #555;
+  font-size: 15px;
+  margin-bottom: 30px;
 }
 
-button.google_register:hover {
-    background: #f5f5f5;
+/* Inputs */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-.login-text {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
+input, select {
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: 0.3s ease;
 }
 
-.login-link {
-    color: var(--btn-color);
-    font-weight: bold;
-    text-decoration: none;
+input:focus, select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 8px rgba(219,68,68,0.2);
+  outline: none;
 }
 
-.login-link:hover {
-    text-decoration: underline;
+/* Buttons */
+.signup-actions {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    
+  gap: 10px;             
+  margin-top: 15px;
 }
 
-.error {
-    color: red;
-    font-size: 13px;
-    margin-bottom: 10px;
+
+button {
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #b83636;
+  transform: translateY(-2px);
+}
+
+.link-text {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.link-text:hover {
+  text-decoration: underline;
+}
+
+/* Error text */
+.error-text {
+  color: var(--accent-color);
+  font-size: 13px;
+  margin-top: -5px;
+}
+
+/* Switch login/signup */
+.switch-text {
+  margin-top: 30px;
+  font-size: 14px;
 }
 
 @media (max-width: 992px) {
-    .register-container {
-        flex-direction: column;
-        padding: 20px;
-    }
-
-    .img-box {
-        width: 100%;
-        height: 280px;
-        margin-left: 0;
-        margin-bottom: 20px;
-    }
-
-    .img-box img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 12px;
-        transform: translateX(-40px);
-    }
-
-    .form-box {
-        width: 100%;
-        padding: 0 15px;
-    }
-
-    .form-card {
-        max-width: 100%;
-        padding: 25px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        background: #fff;
-        border-radius: 12px;
-    }
-}
-
-@media (max-width: 576px) {
-    .form-card h2 {
-        font-size: 22px;
-    }
-
-    .form-card p {
-        font-size: 13px;
-    }
-
-                 .img-box {
-                     width: 100%;
-                     height: 280px;
-                     margin-left: 0;
-                     margin-bottom: 20px;
-                 }
-        
-                 .img-box img {
-                     width: 100%;
-                     height: 100%;
-                     object-fit: cover;
-                     border-radius: 12px;
-                     transform: translateX(-40px);
-                 }
-    form input,
-    form select,
-    button.createAccount,
-    button.google_register {
-        font-size: 14px;
-        padding: 12px;
-    }
-
-    .login-text {
-        font-size: 12px;
-    }
-
-    .register-container {
-        padding: 10px;
-    }
-
-    .form-box {
-        padding: 0;
-    }
-
-    .form-card {
-        padding: 20px;
-    }
+  .signup-wrapper {
+    flex-direction: column;
+  }
+  .signup-left {
+    height: 300px;
+  }
+  .signup-card {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 30px;
+  }
 }
